@@ -1,0 +1,125 @@
+// Montas, Ethan Clyde N.
+// 2025-01-15257
+// BSIT - 2C
+
+
+"cal2c"
+
+my take on a CALCULATOR in java (inspired by Casio's SL-310UC)
+
+- how run?
+> you need Java 14 or newer
+> if u have maven:
+  mvn compile exec:java
+> to compile manually:
+  javac -d bin src/main/java/bucs/montas/cal2c/*.java
+  java -cp "bin;src/main/resources" bucs.montas.cal2c.Calculator
+
+or just run build/run on Apache Netbeans
+
+
+-HELP-
+
+- Press AC to turn the calculator on, as it starts powered off
+- Click and drag the calculator body to move the frameless window anywhere on screen
+- Click 📌︎ on the left of the solar panel to pin or unpin the calculator always on top
+- Click 🔺︎ in the middle of the solar panel to toggle between normal and zoomed window sizes
+- Click ❌︎ on the right of the solar panel to close the application
+
+- Hold AC or C to enter Theme mode
+- Press C while in Theme mode to cycle through all 10 Casio color themes
+- Press AC while in Theme mode to confirm your theme and return to normal mode
+
+- Press 0–9 and . to enter numbers up to 10 digits, which automatically format to scientific notation for very large or very small values
+- Press +/- to toggle between a positive or negative sign
+- Press ► to delete the last digit entered
+- Press C to clear the current entry
+- Press AC to reset the entry
+
+- Use +, -, ×, ÷, and = to perform standard arithmetic evaluated with full order of operations (√ → ^ → × ÷ ⁒ → + -)
+- Press √ to calculate the square root of the current number
+- Press % to calculate percentages
+- Press H/M/S to toggle the current value between decimal hours and H-MM'SS" (Hours-Minutes-Seconds) format
+
+- Hold √ to trigger x² and square the current number
+- Hold ÷ to trigger 1/x and calculate the reciprocal
+- Hold × to trigger ^ and raise a number to a power
+- Hold % to trigger ⁒ and find the remainder after division
+- Hold . to insert an open parenthesis that supports up to 5 nested levels
+- Hold = to insert a closing parenthesis then preview the grouped expression
+
+- Tap an operator (+, -, ×, ÷, ^, ⁒) twice in a row after entering a number to lock it as a constant (K), then press = repeatedly to reapply that operation
+
+- Press M+ to add the displayed value to memory
+- Press M- to subtract the displayed value from memory
+- Press MR to recall the stored memory value onto the screen
+- Press MC to clear memory to 0 and hide the M indicator
+
+- Press TAX+ to add tax to the current value using the default 10% rate
+- Press TAX- to extract the pre-tax value from a tax-included amount
+- Hold TAX+ or TAX- to set a custom tax rate, type the desired percentage, and press % to save (or press AC or C to cancel)
+
+
+-SPECIAL THANKS-
+
+# logic and behavior
+https://www.casio.com/ph/basic-calculators/product.SL-310UC-WE/
+https://www.edu-casio.es/wp-content/uploads/2020/01/SL-310UC_guia.pdf
+
+# expression parsing, algorithms, math concepts (BackEnd.java)
+https://en.wikipedia.org/wiki/Shunting_yard_algorithm
+https://en.wikipedia.org/wiki/Reverse_Polish_notation
+https://en.wikipedia.org/wiki/Order_of_operations
+https://en.wikipedia.org/wiki/Operator_associativity
+https://en.wikipedia.org/wiki/Sexagesimal
+https://en.wikipedia.org/wiki/Finite-state_machine
+
+# stack evaluation, ieee 754 math, string formatting (BackEnd.java)
+https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html
+https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
+https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html
+https://docs.oracle.com/javase/8/docs/api/java/lang/String.html
+https://docs.oracle.com/javase/8/docs/api/java/lang/Character.html
+https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html
+https://docs.oracle.com/javase/8/docs/api/java/util/regex/package-summary.html
+
+# swing windowing, layout, controls, event listeners (FrontEnd.java / Calculator.java)
+https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html
+https://docs.oracle.com/javase/tutorial/uiswing/misc/trans_shaped_windows.html
+https://docs.oracle.com/javase/tutorial/uiswing/painting/index.html
+https://docs.oracle.com/javase/tutorial/uiswing/layout/none.html
+https://docs.oracle.com/javase/tutorial/uiswing/components/button.html
+https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
+https://docs.oracle.com/javase/8/docs/api/javax/swing/JButton.html
+https://docs.oracle.com/javase/8/docs/api/javax/swing/JLabel.html
+https://docs.oracle.com/javase/8/docs/api/javax/swing/JPanel.html
+https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
+https://docs.oracle.com/javase/8/docs/api/javax/swing/ButtonModel.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/Window.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/Dimension.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionListener.html
+https://docs.oracle.com/javase/8/docs/api/javax/swing/event/ChangeListener.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/event/MouseAdapter.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/event/MouseEvent.html
+
+# image loading, off-screen argb compositing, lcd typography (FrontEnd.java / Calculator.java)
+https://docs.oracle.com/javase/8/docs/api/javax/imageio/ImageIO.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/image/BufferedImage.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics2D.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/Graphics.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/RenderingHints.html
+https://docs.oracle.com/javase/tutorial/2d/text/measuringtext.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/FontMetrics.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/Font.html
+https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html
+
+# resource loading, stream initialization, maven packaging (Calculator.java / *.xml)
+https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html
+https://docs.oracle.com/javase/8/docs/api/java/lang/System.html
+https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html
+https://maven.apache.org/plugins/maven-jar-plugin/
+https://www.mojohaus.org/exec-maven-plugin/
+
+# modern java language features (Java 10–14)
+https://openjdk.org/jeps/286
+https://openjdk.org/jeps/361
